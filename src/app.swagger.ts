@@ -3,9 +3,9 @@ import { INestApplication } from '@nestjs/common';
 
 export const initSwagger = (app: INestApplication) => {
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('Alarm History API')
+    .setTitle('Movies')
     .addBearerAuth()
-    .setDescription('SEMI-TS Alarm History API Documents')
+    .setDescription('Movies API Documents')
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('/docs', app, document);
