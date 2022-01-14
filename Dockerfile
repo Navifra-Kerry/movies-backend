@@ -4,6 +4,7 @@ EXPOSE 4000
 
 COPY package*.json ./
 
+RUN npx -g @nestjs/cli
 RUN npm install --only=production
 RUN npm ci --only=production
 
