@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kerry.service: backend
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kerry.service: backend
+  template:
+    metadata:
+      labels:
+        io.kerry.service: backend
+    spec:
+      containers:
+        - env:
+            - name: DATABASE_HOST
+              value: database
+            - name: DATABASE_NAME
+              value: movies_db
+            - name: DATABASE_PASSWORD
+              value: movies_password
+            - name: DATABASE_PORT
+              value: '5000'
+            - name: DATABASE_USERNAME
+              value: movies_user
+            - name: PORT
+              value: '4000'
+            - name: UPLOAD_PATH
+              value: /etc/app/uploads
+          image: cdh0012/movies_backend:latest
+          name: backend
+          ports:
+            - containerPort: 4000
+          resources: {}
+          volumeMounts:
+            - mountPath: /etc/app/uploads
+              name: data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: pvc-upload-image

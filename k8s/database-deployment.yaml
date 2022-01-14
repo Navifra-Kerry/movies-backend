@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kerry.service: database
+  name: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kerry.service: database
+  template:
+    metadata:
+      labels:
+        io.kerry.network/moviesbackend-backend1: 'true'
+        io.kerry.service: database
+    spec:
+      containers:
+        - args:
+            - --default-authentication-plugin=mysql_native_password
+            - --character-set-server=utf8mb4
+            - --collation-server=utf8mb4_unicode_ci
+          env:
+            - name: MYSQL_DATABASE
+              value: movies_db
+            - name: MYSQL_PASSWORD
+              value: movies_password
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+            - name: MYSQL_USER
+              value: movies_user
+          image: mariadb:10.3
+          name: database
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: data
+          resources: {}
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: pvc-mariadb
