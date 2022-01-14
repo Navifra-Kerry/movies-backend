@@ -3,9 +3,7 @@ WORKDIR /usr/src/app
 EXPOSE 4000
 
 COPY package*.json ./
-
-RUN npx -g @nestjs/cli
-RUN npm install --only=production
+RUN npm install
 RUN npm ci --only=production
 
 COPY . .
