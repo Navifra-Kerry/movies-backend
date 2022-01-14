@@ -46,7 +46,6 @@ export class UploadController {
   @Post()
   uploadFile(@UploadedFile() file: Express.Multer.File) {
     const response = {
-      originalname: file.originalname,
       filename: file.filename,
     };
     return response;

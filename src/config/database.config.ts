@@ -17,12 +17,12 @@ function typeormModuleOptions(): TypeOrmModuleOptions {
     /** Recursos
      *  * https://typeorm.io/#/migrations
      */
-    migrationsRun: false,
-    migrations: [join(__dirname, '../migration/**/*{.ts,.js}')],
-    migrationsTableName: 'migrations_typeorm',
-    cli: {
-      migrationsDir: 'src/migration',
-    },
+    //migrationsRun: false,
+    //migrations: [join(__dirname, '../migration/**/*{.ts,.js}')],
+    //migrationsTableName: 'migrations_typeorm',
+    //cli: {
+    //  migrationsDir: 'src/migration',
+    //},
 
     // Activar SOLO MANUALMENTE en DESARROLLO SI ES NECESARIO (DESACTIVAR EN PRODUCCION).
     synchronize: true,

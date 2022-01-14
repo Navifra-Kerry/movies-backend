@@ -3,8 +3,11 @@ WORKDIR /usr/src/app
 EXPOSE 4000
 
 COPY package*.json ./
-RUN npm install
 
-ADD dist/ /usr/src/app/
+RUN npm install --only=production
+RUN npm ci --only=production
 
-CMD [ "node", "main.js" ]
+COPY . .
+
+RUN npm run build
+CMD [ "node", "dist/main" ]
