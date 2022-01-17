@@ -18,7 +18,7 @@ spec:
         - env:
             - name: API_SERVER
               value: http://backend:4000
-          image: cdh0012/movies:latest
+          image: cdh0012//simplehtml:latest
           name: frontend
           ports:
             - containerPort: 8000
